@@ -32,7 +32,7 @@ OptionParser.new do |opts|
   opts.on("-l", "--lines", "Write to the standard output the number of lines in each input file.") { options[:lines] = true }
   opts.on("-m", "--chars", "Write to the standard output the number of characters in each input file.") { options[:chars] = true }
   opts.on("-w", "--words", "Write to the standard output the number of words in each input file.") { options[:words] = true }
-  opts.on("-h", "--help",  "Show this help") { puts opts; exit }
+  opts.on("-h", "--help", "Show this help") { puts opts; exit }
 end.parse!
 options = {bytes: true, lines: true, chars: false, words: true} if options.empty?
 
@@ -41,10 +41,10 @@ if ARGV.empty?
   print_row(counts(text, options))
 else
   rows = ARGV.map do |fd|
-    text = File.read(fd)
-    row  = counts(text, options)
-    print_row(row, fd)
-    row
-  end
+           text = File.read(fd)
+           row = counts(text, options)
+           print_row(row, fd)
+           row
+         end
   print_row(totals(rows.transpose), "total") if ARGV.size >= 2
 end
