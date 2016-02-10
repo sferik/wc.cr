@@ -13,7 +13,7 @@ def counts(text, options)
 end
 
 def totals(cols)
-  cols.map(&.inject(0) { |sum, n| sum += n })
+  cols.map(&.reduce(0) { |sum, n| sum += n })
 end
 
 def print_row(row, label = nil)
@@ -37,7 +37,7 @@ end.parse!
 options = {bytes: true, lines: true, chars: false, words: true} if options.empty?
 
 if ARGV.empty?
-  text = ARGF.read
+  text = ARGF.gets_to_end
   print_row(counts(text, options))
 else
   rows = ARGV.map do |fd|
