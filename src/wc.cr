@@ -26,15 +26,15 @@ def print_row(row, label = nil)
 end
 
 options = Hash(Symbol, Bool).new { |h, v| h[v] = false }
-OptionParser.new do |opts|
+OptionParser.parse do |opts|
   opts.banner = "usage: wc [-chlw] [file ...]"
   opts.on("-c", "--bytes", "Write to the standard output the number of bytes in each input file.") { options[:bytes] = true }
   opts.on("-l", "--lines", "Write to the standard output the number of lines in each input file.") { options[:lines] = true }
   opts.on("-m", "--chars", "Write to the standard output the number of characters in each input file.") { options[:chars] = true }
   opts.on("-w", "--words", "Write to the standard output the number of words in each input file.") { options[:words] = true }
   opts.on("-h", "--help", "Show this help") { puts opts; exit }
-end.parse!
-options = {bytes: true, lines: true, chars: false, words: true} if options.empty?
+end
+options = {:bytes => true, :lines => true, :chars => false, :words => true} if options.empty?
 
 if ARGV.empty?
   text = ARGF.gets_to_end
